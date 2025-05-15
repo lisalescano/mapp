@@ -7,10 +7,10 @@ import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
 // Fix para los íconos en producción
 const DefaultIcon = L.icon({
-  iconUrl: icon,
-  shadowUrl: iconShadow,
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
+    iconUrl: icon,
+    shadowUrl: iconShadow,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
 });
 L.Marker.prototype.options.icon = DefaultIcon;
 
@@ -28,9 +28,11 @@ export default function MapaInteractivo() {
         });
         return null;
     }
-    
+
 
     return (<div>
+        {markers && markers.map(obj => (`lat:${obj.lat} long:${obj.lng}`))}
+
         <MapContainer center={position} zoom={13} style={{ height: "500px" }}>
             <TileLayer
                 url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
@@ -46,9 +48,6 @@ export default function MapaInteractivo() {
             ))}
 
         </MapContainer>
-        
-        {markers && markers.map(obj=>(`lat:${obj.lat} long:${obj.lng}`))}
-        
-        </div>
+    </div>
     );
 }
